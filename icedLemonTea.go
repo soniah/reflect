@@ -5,7 +5,7 @@ import (
 	"reflect"
 )
 
-// Iced Lemon Tea, Char Siu; Mong Kok.
+// Iced Lemon Tea, Char Siu, Mong Kok.
 func icedLemonTea() {
 	fmt.Printf("\n%s\n\n", "-- icedLemonTea() -- TypeOf(), ValueOf() --")
 
@@ -31,7 +31,6 @@ var it iT = 4`)
 	fmt.Println("reflect.ValueOf(it)   :", reflect.ValueOf(it))    // 4
 
 	fmt.Println()
-	// ValueOf without String() shows the concrete value inside
 	fmt.Println("reflect.ValueOf(inter).String()):", reflect.ValueOf(inter).String()) // <invalid Value>
 	fmt.Println("reflect.ValueOf(i).String())    :", reflect.ValueOf(i).String())     // <int Value>
 	fmt.Println("reflect.ValueOf(it).String())   :", reflect.ValueOf(it).String())    // <main.iT Value>
