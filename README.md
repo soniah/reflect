@@ -1,7 +1,7 @@
 # reflect
 
-Experiments in golang reflect, interfaces and structs. Study and notes for myself,
-but possibly useful to others.
+Experiments in golang reflect, interfaces and structs. My study notes but
+possibly useful to others.
 
 # Reading
 

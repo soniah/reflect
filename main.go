@@ -30,5 +30,6 @@ func main() {
 	// dingding()
 	// icedLemonTea()
 	// portugueseTart()
-	sinoCentre()
+	// sinoCentre()
+	tungChung()
 }

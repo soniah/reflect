@@ -16,6 +16,7 @@ func sinoCentre() {
 
 	// bm := m["breakfast_menu"]
 	// food := bm[0] // invalid operation: bm[0] (type interface {} does not support indexing)
+	// TODO use statements like `if aString, ok := anything.(string); ok {...`
 
 	bm := m["breakfast_menu"].(map[string]interface{})
 	food := bm["food"].([]interface{})
