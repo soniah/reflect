@@ -5,14 +5,15 @@ possibly useful to others.
 
 # Reading
 
-* [The Laws of Reflection](https://blog.golang.org/laws-of-reflection)
 * [Reflect Package](https://golang.org/pkg/reflect/)
+* [The Laws of Reflection](https://blog.golang.org/laws-of-reflection)
 
 # Some detailed examples and explanations
 
-* [Drew Olson 'Golang Reflection Example](https://gist.github.com/drewolson/4771479)
+* [Drew Olson 'Golang Reflection Example'](https://gist.github.com/drewolson/4771479)
 * [hvoecking 'Golang reflection: traversing arbitrary structures'](https://gist.github.com/hvoecking/10772475)
 * [Dan Sosedoff 'Custom struct field tags in Golang'](http://sosedoff.com/2016/07/16/golang-struct-tags.html)
+* [StackOverflow 'Using reflect, how do you set the value of a struct field?'](https://stackoverflow.com/questions/6395076/using-reflect-how-do-you-set-the-value-of-a-struct-field)
 
 # Other examples
 
