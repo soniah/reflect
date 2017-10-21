@@ -46,9 +46,8 @@ func fillStruct(allParameters string) guitaristT {
 			log.Fatalln("malformed parameter", parameter)
 		}
 		key := kv[0]
-		fmt.Println("key", key)
 		value := kv[1]
-		fmt.Println("value", value)
+		fmt.Printf("key %s, value %s\n", key, value)
 
 		//		field := gv.FieldByName(key)
 	}
