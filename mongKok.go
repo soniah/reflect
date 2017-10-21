@@ -54,8 +54,10 @@ func fillStruct(allParameters string) guitaristT {
 
 		field := gv.FieldByName(key)
 		// fmt.Printf("%# v\n\n", pretty.Formatter(field))
-		fmt.Println("key type", reflect.ValueOf(field).Type())
-		fmt.Println("key type", reflect.ValueOf(field).Kind())
+
+		// displays "string, int, bool, float32" for fields "surname, year, american, rating" - as expected
+		// diplays "invalid" for styles slice
+		fmt.Println("key kind", field.Kind())
 
 		fmt.Println()
 		fmt.Println()
