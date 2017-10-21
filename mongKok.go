@@ -36,13 +36,21 @@ func fillStruct(allParameters string) guitaristT {
 	if len(parameters) == 0 {
 		log.Fatalln("parameters input is  malformed", allParameters)
 	}
+
 	result := guitaristT{}
 
+	// working this way means I'll always be working with a copy. I think.
+	// gv := reflect.ValueOf(result) // since haven't taken address of result, don't need Elem()
+
+	// Working with a pointer to the struct means I can modify it. I think.
+
+	// If we want to modify x by reflection, we must give the reflection library a pointer to the value we want to modify.
+	//
 	// Elem returns the value that the interface v contains or that the pointer
 	// v points to. It panics if v's Kind is not Interface or Ptr. It returns
 	// the zero Value if v is nil.
-	//gv := reflect.ValueOf(result).Elem()
-	gv := reflect.ValueOf(result)
+
+	gv := reflect.ValueOf(result).Elem()
 
 	for _, parameter := range parameters {
 		kv := strings.Split(parameter, "=")
@@ -52,7 +60,8 @@ func fillStruct(allParameters string) guitaristT {
 		key := kv[0]
 		value := kv[1]
 		field := gv.FieldByName(key)
-		fmt.Printf("key: %s,\tvalue: %s,\tkind: %s\n", key, value, field.Kind())
+
+		fmt.Printf("key: %s,\tvalue: %s,\tkind: %s\n", key, value)
 		/*
 			key: surname,	value: Hendrix,	kind: string
 			key: year,	    value: 1942,	kind: int
@@ -61,9 +70,28 @@ func fillStruct(allParameters string) guitaristT {
 			key: style,	    value: blues,	kind: invalid   // notice slice fields are invalid
 			key: style,	    value: rock,	kind: invalid
 			key: style,	    value: psychedelic,	kind: invalid
-
 		*/
 
+		fmt.Println(field.Type())
+		/*
+			switch field.Kind() {
+
+			case reflect.Bool:
+				fmt.Println("key is bool:", key)
+			 default:
+				fmt.Println("key type unknown:", key)
+			}
+
+			/* cannot type switch on non-interface value field (type reflect.Value)
+			switch field := field.(type) {
+			case bool:
+				fmt.Printf("boolean:\t\t%t\n", field)
+			case int:
+				fmt.Printf("integer:\t\t%d\n", field)
+			default:
+				fmt.Printf("unexpected type:\t%T\n", field) // %T prints whatever type t has
+			}
+		*/
 	}
 	return result
 }
