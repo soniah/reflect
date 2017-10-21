@@ -24,13 +24,14 @@ func mongKok() {
 
 	jimiEnvvar := "surname=Hendrix|year=1942|american=true|rating=10.0|style=blues|style=rock|style=psychedelic"
 	jimiStruct := fillStruct(jimiEnvvar)
-	fmt.Printf("%# v", pretty.Formatter(jimiStruct))
+	fmt.Printf("\n\n%# v", pretty.Formatter(jimiStruct))
 
 	//sonia := "surname=Hamilton|rating=0.9|style=blues|style=reggae"
 
 }
 
 func fillStruct(allParameters string) guitaristT {
+	fmt.Println()
 	parameters := strings.Split(allParameters, "|")
 	if len(parameters) == 0 {
 		log.Fatalln("parameters input is  malformed", allParameters)
@@ -50,17 +51,19 @@ func fillStruct(allParameters string) guitaristT {
 		}
 		key := kv[0]
 		value := kv[1]
-		fmt.Printf("key %s, value %s\n", key, value)
-
 		field := gv.FieldByName(key)
-		// fmt.Printf("%# v\n\n", pretty.Formatter(field))
+		fmt.Printf("key: %s,\tvalue: %s,\tkind: %s\n", key, value, field.Kind())
+		/*
+			key: surname,	value: Hendrix,	kind: string
+			key: year,	    value: 1942,	kind: int
+			key: american,	value: true,	kind: bool
+			key: rating,	value: 10.0,	kind: float32
+			key: style,	    value: blues,	kind: invalid   // notice slice fields are invalid
+			key: style,	    value: rock,	kind: invalid
+			key: style,	    value: psychedelic,	kind: invalid
 
-		// displays "string, int, bool, float32" for fields "surname, year, american, rating" - as expected
-		// diplays "invalid" for styles slice
-		fmt.Println("key kind", field.Kind())
+		*/
 
-		fmt.Println()
-		fmt.Println()
 	}
 	return result
 }
