@@ -45,9 +45,9 @@ func fillStruct(allParameters string) guitaristT {
 	//
 	// f(x)
 	//
-	// 	We would not expect f to be able to modify x because we passed a copy of
-	// 	x's value, not x itself. If we want f to modify x directly we must pass
-	// 	our function the address of x (that is, a pointer to x):
+	// We would not expect f to be able to modify x because we passed a copy of
+	// x's value, not x itself. If we want f to modify x directly we must pass
+	// our function the address of x (that is, a pointer to x):
 	//
 	// f(&x)
 
@@ -64,8 +64,7 @@ func fillStruct(allParameters string) guitaristT {
 
 	v := p.Elem()
 
-	// usually:
-	// v := reflect.ValueOf(&result).Elem()
+	// usually: v := reflect.ValueOf(&result).Elem()
 
 	for _, parameter := range parameters {
 		kv := strings.Split(parameter, "=")
