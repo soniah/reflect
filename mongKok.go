@@ -44,13 +44,23 @@ func fillStruct(allParameters string) guitaristT {
 
 	// Working with a pointer to the struct means I can modify it. I think.
 
-	// If we want to modify x by reflection, we must give the reflection library a pointer to the value we want to modify.
+	// If we want to modify x by reflection, we must give the reflection library
+	// a pointer to the value we want to modify.  Think of passing x to a
+	// function:
+	//
+	// f(x)
+	//
+	// 	We would not expect f to be able to modify x because we passed a copy of
+	// 	x's value, not x itself. If we want f to modify x directly we must pass
+	// 	our function the address of x (that is, a pointer to x):
+	//
+	// f(&x)
 	//
 	// Elem returns the value that the interface v contains or that the pointer
 	// v points to. It panics if v's Kind is not Interface or Ptr. It returns
 	// the zero Value if v is nil.
 
-	gv := reflect.ValueOf(result).Elem()
+	gv := reflect.ValueOf(&result).Elem()
 
 	for _, parameter := range parameters {
 		kv := strings.Split(parameter, "=")
