@@ -10,7 +10,7 @@ possibly useful to others.
 
 # Some detailed examples and explanations
 
-* [Drew Olson 'Golang Reflection Example](https://gist.github.com/drewolson/4771479)
+* [Drew Olson 'Golang Reflection Example'](https://gist.github.com/drewolson/4771479)
 * [hvoecking 'Golang reflection: traversing arbitrary structures'](https://gist.github.com/hvoecking/10772475)
 * [Dan Sosedoff 'Custom struct field tags in Golang'](http://sosedoff.com/2016/07/16/golang-struct-tags.html)
 
