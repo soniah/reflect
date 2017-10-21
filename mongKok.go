@@ -5,6 +5,8 @@ import (
 	"log"
 	"strings"
 
+	"reflect"
+
 	"github.com/kr/pretty"
 )
 
@@ -22,7 +24,7 @@ func mongKok() {
 
 	jimiEnvvar := "surname=Hendrix|year=1942|american=true|rating=10.0|style=blues|style=rock|style=psychedelic"
 	jimiStruct := fillStruct(jimiEnvvar)
-	fmt.Printf("%# v", pretty.Formatter(jimiStruct)) // TODO print to log
+	fmt.Printf("%# v", pretty.Formatter(jimiStruct))
 
 	//sonia := "surname=Hamilton|rating=0.9|style=blues|style=reggae"
 
@@ -38,7 +40,8 @@ func fillStruct(allParameters string) guitaristT {
 	// Elem returns the value that the interface v contains or that the pointer
 	// v points to. It panics if v's Kind is not Interface or Ptr. It returns
 	// the zero Value if v is nil.
-	// gv := reflect.ValueOf(guitarist).Elem()
+	//gv := reflect.ValueOf(result).Elem()
+	gv := reflect.ValueOf(result)
 
 	for _, parameter := range parameters {
 		kv := strings.Split(parameter, "=")
@@ -49,7 +52,8 @@ func fillStruct(allParameters string) guitaristT {
 		value := kv[1]
 		fmt.Printf("key %s, value %s\n", key, value)
 
-		//		field := gv.FieldByName(key)
+		field := gv.FieldByName(key)
+		fmt.Printf("%# v", pretty.Formatter(field))
 	}
 	return result
 }
