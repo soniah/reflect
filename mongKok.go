@@ -71,36 +71,34 @@ func fillStruct(allParameters string) guitaristT {
 		value := kv[1]
 		field := gv.FieldByName(key)
 
-		fmt.Printf("key: %s,\tvalue: %s,\tkind: %s\n", key, value)
+		fmt.Printf("key: %s,\tvalue: %s,\tkind: %s\n", key, value, field.Kind())
 		/*
-			key: surname,	value: Hendrix,	kind: string
-			key: year,	    value: 1942,	kind: int
-			key: american,	value: true,	kind: bool
-			key: rating,	value: 10.0,	kind: float32
-			key: style,	    value: blues,	kind: invalid   // notice slice fields are invalid
-			key: style,	    value: rock,	kind: invalid
-			key: style,	    value: psychedelic,	kind: invalid
+			key: surname,   value: Hendrix, kind: string
+			key: year,      value: 1942,    kind: int
+			key: american,  value: true,    kind: bool
+			key: rating,    value: 10.0,    kind: float32
+			key: style,     value: blues,   kind: invalid     // notice array fields are invalid
+			key: style,     value: rock,    kind: invalid
+			key: style,     value: psychedelic,     kind: invalid
 		*/
 
-		fmt.Println(field.Type())
-		/*
-			switch field.Kind() {
+		switch field.Kind() {
 
-			case reflect.Bool:
-				fmt.Println("key is bool:", key)
-			 default:
-				fmt.Println("key type unknown:", key)
-			}
+		case reflect.Bool:
+			fmt.Println("key is bool:", key)
+		default:
+			fmt.Println("key type unknown:", key)
+		}
 
-			/* cannot type switch on non-interface value field (type reflect.Value)
-			switch field := field.(type) {
-			case bool:
-				fmt.Printf("boolean:\t\t%t\n", field)
-			case int:
-				fmt.Printf("integer:\t\t%d\n", field)
-			default:
-				fmt.Printf("unexpected type:\t%T\n", field) // %T prints whatever type t has
-			}
+		/* cannot type switch on non-interface value field (type reflect.Value)
+		switch field := field.(type) {
+		case bool:
+			fmt.Printf("boolean:\t\t%t\n", field)
+		case int:
+			fmt.Printf("integer:\t\t%d\n", field)
+		default:
+			fmt.Printf("unexpected type:\t%T\n", field) // %T prints whatever type t has
+		}
 		*/
 	}
 	return result
