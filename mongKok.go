@@ -34,18 +34,13 @@ func fillStruct(allParameters string) guitaristT {
 	fmt.Println()
 	parameters := strings.Split(allParameters, "|")
 	if len(parameters) == 0 {
-		log.Fatalln("parameters input is  malformed", allParameters)
+		log.Fatalln("parameters input is malformed", allParameters)
 	}
 
 	result := guitaristT{}
 
-	// working this way means I'll always be working with a copy. I think.
-	// gv := reflect.ValueOf(result) // since haven't taken address of result, don't need Elem()
-
-	// Working with a pointer to the struct means I can modify it. I think.
-
 	// If we want to modify x by reflection, we must give the reflection library
-	// a pointer to the value we want to modify.  Think of passing x to a
+	// a pointer to the value we want to modify. Think of passing x to a
 	// function:
 	//
 	// f(x)
@@ -92,19 +87,10 @@ func fillStruct(allParameters string) guitaristT {
 		case reflect.Float32:
 			fmt.Println("key is Float32:", key)
 		default:
+			// slice fields
 			fmt.Println("key type **UNKNOWN**:", key)
 		}
-
-		/* cannot type switch on non-interface value field (type reflect.Value)
-		switch field := field.(type) {
-		case bool:
-			fmt.Printf("boolean:\t\t%t\n", field)
-		case int:
-			fmt.Printf("integer:\t\t%d\n", field)
-		default:
-			fmt.Printf("unexpected type:\t%T\n", field) // %T prints whatever type t has
-		}
-		*/
 	}
+
 	return result
 }
