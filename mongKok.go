@@ -50,12 +50,22 @@ func fillStruct(allParameters string) guitaristT {
 	// 	our function the address of x (that is, a pointer to x):
 	//
 	// f(&x)
-	//
+
+	p := reflect.ValueOf(&result)
+
+	// The reflection object p isn't settable, but it's not p we want to set,
+	// it's (in effect) *p. To get to what p points to, we call the Elem method
+	// of Value, which indirects through the pointer, and save the result in a
+	// reflection Value called v:
+
 	// Elem returns the value that the interface v contains or that the pointer
 	// v points to. It panics if v's Kind is not Interface or Ptr. It returns
 	// the zero Value if v is nil.
 
-	gv := reflect.ValueOf(&result).Elem()
+	v := p.Elem()
+
+	// usually:
+	// v := reflect.ValueOf(&result).Elem()
 
 	for _, parameter := range parameters {
 		kv := strings.Split(parameter, "=")
@@ -64,7 +74,7 @@ func fillStruct(allParameters string) guitaristT {
 		}
 		key := kv[0]
 		value := kv[1]
-		field := gv.FieldByName(key)
+		field := v.FieldByName(key)
 
 		fmt.Printf("key: %s,\tvalue: %s,\tkind: %s\n", key, value, field.Kind())
 		/*
