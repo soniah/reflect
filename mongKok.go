@@ -83,11 +83,16 @@ func fillStruct(allParameters string) guitaristT {
 		*/
 
 		switch field.Kind() {
-
+		case reflect.String:
+			fmt.Println("key is String:", key)
+		case reflect.Int:
+			fmt.Println("key is Int:", key)
 		case reflect.Bool:
-			fmt.Println("key is bool:", key)
+			fmt.Println("key is Bool:", key)
+		case reflect.Float32:
+			fmt.Println("key is Float32:", key)
 		default:
-			fmt.Println("key type unknown:", key)
+			fmt.Println("key type **UNKNOWN**:", key)
 		}
 
 		/* cannot type switch on non-interface value field (type reflect.Value)
