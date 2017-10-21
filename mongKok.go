@@ -53,7 +53,12 @@ func fillStruct(allParameters string) guitaristT {
 		fmt.Printf("key %s, value %s\n", key, value)
 
 		field := gv.FieldByName(key)
-		fmt.Printf("%# v\n\n", pretty.Formatter(field))
+		// fmt.Printf("%# v\n\n", pretty.Formatter(field))
+		fmt.Println("key type", reflect.ValueOf(field).Type())
+		fmt.Println("key type", reflect.ValueOf(field).Kind())
+
+		fmt.Println()
+		fmt.Println()
 	}
 	return result
 }
