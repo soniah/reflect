@@ -3,8 +3,9 @@ package main
 import (
 	"fmt"
 	"log"
-	"reflect"
 	"strings"
+
+	"github.com/kr/pretty"
 )
 
 type guitaristT struct {
@@ -19,31 +20,37 @@ type guitaristT struct {
 func mongKok() {
 	// example parameters taken out of an environment variable
 
-	jimi := "surname=Hendrix|year=1942|american=true|rating=10.0|style=blues|style=rock|style=psychedelic"
-	fmt.Println(jimi)
+	jimiEnvvar := "surname=Hendrix|year=1942|american=true|rating=10.0|style=blues|style=rock|style=psychedelic"
+	jimiStruct := fillStruct(jimiEnvvar)
+	fmt.Printf("%# v", pretty.Formatter(jimiStruct)) // TODO print to log
 
 	//sonia := "surname=Hamilton|rating=0.9|style=blues|style=reggae"
 
 }
 
-func (guitarist *guitaristT) fillStruct(allParameters string) {
+func fillStruct(allParameters string) guitaristT {
 	parameters := strings.Split(allParameters, "|")
-	if len(splits) == 0 {
-		log.Fatalln("parameters empty")
+	if len(parameters) == 0 {
+		log.Fatalln("parameters input is  malformed", allParameters)
 	}
+	result := guitaristT{}
 
 	// Elem returns the value that the interface v contains or that the pointer
 	// v points to. It panics if v's Kind is not Interface or Ptr. It returns
 	// the zero Value if v is nil.
-	gv := reflect.ValueOf(guitarist).Elem()
+	// gv := reflect.ValueOf(guitarist).Elem()
 
 	for _, parameter := range parameters {
-		kv := strings.Split("=")
+		kv := strings.Split(parameter, "=")
 		if len(kv) != 2 {
-			log.Fatalln("malformed param", parameter)
+			log.Fatalln("malformed parameter", parameter)
 		}
 		key := kv[0]
+		fmt.Println("key", key)
 		value := kv[1]
-		field := gv.FieldByName(key)
+		fmt.Println("value", value)
+
+		//		field := gv.FieldByName(key)
 	}
+	return result
 }
