@@ -26,6 +26,8 @@ func atoi(s string) int {
 	return i
 }
 
+// TODO sort out 'log' vs 'fmt' for output
+
 func main() {
 	// dingding()
 	// icedLemonTea()
