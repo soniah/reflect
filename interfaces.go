@@ -10,7 +10,7 @@ import (
 
 // Ding Ding - Shau Kei Wan, HKU, Kennedy Town, Admiralty.
 func interfaces() {
-	fmt.Printf("\n%s\n\n", "-- dingding() -- interfaces --")
+	fmt.Printf("\n%s\n", "-- interfaces --")
 
 	const scratch = "/var/tmp/scratch"
 	var err error
@@ -36,14 +36,14 @@ func interfaces() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	fmt.Printf("foo: read %d bytes: %s\n\n", n, string(buf))
+	fmt.Printf("foo: read %d bytes: %s\n", n, string(buf))
 
 	// foo (io.ReaderWriter) can be used for writing
 	n, err = foo.Write(buf)
 	if err != nil {
 		log.Fatal(err)
 	}
-	fmt.Printf("foo: wrote %d bytes\n\n", n)
+	fmt.Printf("foo: wrote %d bytes\n", n)
 
 	// but foo can't be used for anything else (even though the concrete value
 	// inside is a *File) - io.ReaderWriter only reads and writes.
@@ -57,7 +57,7 @@ func interfaces() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	fmt.Printf("r: read %d bytes: %s\n\n", n, string(buf))
+	fmt.Printf("r: read %d bytes: %s\n", n, string(buf))
 
 	// but it can't be used for writing
 	// "r.Write undefined (type io.Reader has no field or method Write)"
@@ -71,7 +71,7 @@ func interfaces() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	fmt.Printf("w: wrote %d bytes\n\n", n)
+	fmt.Printf("w: wrote %d bytes\n", n)
 
 	// but it can't be used for reading
 	// "w.Read undefined (type io.Writer has no field or method Read)"

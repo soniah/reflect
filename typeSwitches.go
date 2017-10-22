@@ -26,7 +26,7 @@ Nothing new or interesting here - Tung Chung railway station.
 */
 
 func typeSwitches() {
-	fmt.Printf("\n%s\n\n", "-- tungChung() -- type switches --")
+	fmt.Printf("\n%s\n", "-- type switches --")
 	fmt.Println("Note that t returns the concrete value of `t interface{}`")
 	fmt.Println()
 

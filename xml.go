@@ -8,7 +8,7 @@ import (
 
 // Sino Centre, Mong Kok, Instax Mini.
 func xml() {
-	fmt.Printf("\n%s\n\n", "-- sinoCentre() -- type assertions --")
+	fmt.Printf("\n%s\n", "-- xml --")
 
 	menu := []byte(menuXML) // http client.Do() returns []byte
 	m, err := mxj.NewMapXml(menu)
@@ -29,7 +29,7 @@ func xml() {
 		description := item["description"].(string)
 		calories := atoi(item["calories"].(string))
 
-		fmt.Printf("name: %s, price: %s, description: %s, calories: %d\n\n", name, price, description, calories)
+		fmt.Printf("name: %s, price: %s, description: %s, calories: %d\n", name, price, description, calories)
 	}
 }
 

@@ -21,12 +21,13 @@ type guitaristT struct {
 
 // Mong Kok, Prince Edward, Sham Shui Po, Cheung Sha Wan.
 func structs() {
+	fmt.Printf("\n%s\n", "-- structs --")
 
 	// example parameters taken out of an environment variable
 
 	jimiEnvvar := "surname=Hendrix|year=1942|american=true|rating=9.99|styles=blues|styles=rock|styles=psychedelic"
 	jimiStruct := fillStruct(jimiEnvvar)
-	fmt.Printf("\n\n%# v", pretty.Formatter(jimiStruct))
+	fmt.Printf("\n%# v", pretty.Formatter(jimiStruct))
 
 }
 
@@ -74,40 +75,41 @@ func fillStruct(allParameters string) guitaristT {
 			log.Fatalln("malformed parameter", parameter)
 		}
 		key := strings.Title(kv[0])
-		value := kv[1]
+		valueAsString := kv[1]
 		field := v.FieldByName(key)
 
 		switch field.Kind() {
 
 		case reflect.String:
-			fmt.Println("key:", key, "is String, has value:", value)
-			field.SetString(value)
+			fmt.Println("key:", key, "is String, has value:", valueAsString)
+			field.SetString(valueAsString)
 
 		case reflect.Int64:
-			fmt.Println("key:", key, "is Int64, has value:", value)
-			i, err := strconv.ParseInt(value, 10, 64)
+			fmt.Println("key:", key, "is Int64, has value:", valueAsString)
+			i, err := strconv.ParseInt(valueAsString, 10, 64)
 			catch(err)
 			field.SetInt(i)
 
 		case reflect.Bool:
-			fmt.Println("key:", key, "is Bool, has value:", value)
-			b, err := strconv.ParseBool(value)
+			fmt.Println("key:", key, "is Bool, has value:", valueAsString)
+			b, err := strconv.ParseBool(valueAsString)
 			catch(err)
 			field.SetBool(b)
 
 		case reflect.Float32:
-			fmt.Println("key:", key, "is Float32, has value:", value)
-			f, err := strconv.ParseFloat(value, 32)
+			fmt.Println("key:", key, "is Float32, has value:", valueAsString)
+			f, err := strconv.ParseFloat(valueAsString, 32)
 			catch(err)
 			field.SetFloat(f)
 
 		case reflect.Slice:
-			fmt.Println("key:", key, "is Slice, has value:", value)
-			stringValue := reflect.ValueOf(value)
-			field = reflect.Append(field, stringValue) // FAILS
+			fmt.Println("key:", key, "is Slice, has value:", valueAsString)
+			valueAsValue := reflect.ValueOf(valueAsString)
+			// field = reflect.Append(field, valueAsValue) // FAILS
+			field.Set(reflect.Append(field, valueAsValue))
 
 		default:
-			fmt.Println("XXX: key:", key, "is", field.Kind(), "has value:", value)
+			fmt.Println("XXX: key:", key, "is", field.Kind(), "has value:", valueAsString)
 		}
 		fmt.Println()
 	}

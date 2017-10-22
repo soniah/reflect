@@ -7,7 +7,7 @@ import (
 
 // Iced Lemon Tea, Char Siu, Mong Kok.
 func types() {
-	fmt.Printf("\n%s\n\n", "-- icedLemonTea() -- TypeOf(), ValueOf() --")
+	fmt.Printf("\n%s\n", "-- types --")
 
 	var inter interface{}
 	var i int = 3
@@ -49,5 +49,4 @@ var it iT = 4`)
 	fmt.Println("reflect.ValueOf(it).Type():", reflect.ValueOf(it).Type()) // main.iT
 	fmt.Println("reflect.ValueOf(it).Kind():", reflect.ValueOf(it).Kind()) // int
 	fmt.Println("reflect.ValueOf(it).Int() :", reflect.ValueOf(it).Int())  // 4
-
 }
