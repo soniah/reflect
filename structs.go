@@ -20,7 +20,7 @@ type guitaristT struct {
 }
 
 // Mong Kok, Prince Edward, Sham Shui Po, Cheung Sha Wan.
-func mongKok() {
+func structs() {
 
 	// example parameters taken out of an environment variable
 

@@ -7,8 +7,8 @@ import (
 	"text/tabwriter"
 )
 
-// Portuguese Tart - Mong Kok East, Kennedy Town, Cathay City.
-func portugueseTart() {
+// Portuguese Tarts - Mong Kok East, Kennedy Town, Cathay City.
+func types2() {
 	fmt.Printf("\n%s\n\n", "-- portugueseTart() -- more Types/Kinds --")
 	w := tabwriter.NewWriter(os.Stdout, 40, 8, 0, ' ', 0)
 

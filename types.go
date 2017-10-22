@@ -6,7 +6,7 @@ import (
 )
 
 // Iced Lemon Tea, Char Siu, Mong Kok.
-func icedLemonTea() {
+func types() {
 	fmt.Printf("\n%s\n\n", "-- icedLemonTea() -- TypeOf(), ValueOf() --")
 
 	var inter interface{}

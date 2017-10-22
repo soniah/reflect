@@ -6,8 +6,8 @@ import (
 	"github.com/clbanning/mxj"
 )
 
-// Sino Centre, Mong Kok. Instax Mini.
-func sinoCentre() {
+// Sino Centre, Mong Kok, Instax Mini.
+func xml() {
 	fmt.Printf("\n%s\n\n", "-- sinoCentre() -- type assertions --")
 
 	menu := []byte(menuXML) // http client.Do() returns []byte

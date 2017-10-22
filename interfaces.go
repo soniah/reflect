@@ -9,7 +9,7 @@ import (
 )
 
 // Ding Ding - Shau Kei Wan, HKU, Kennedy Town, Admiralty.
-func dingding() {
+func interfaces() {
 	fmt.Printf("\n%s\n\n", "-- dingding() -- interfaces --")
 
 	const scratch = "/var/tmp/scratch"
@@ -80,5 +80,4 @@ func dingding() {
 	// or anything else, an io.Writer only writes
 	// "w.Sync undefined (type io.Writer has no field or method Sync)"
 	// err = w.Sync()
-
 }

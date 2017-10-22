@@ -29,10 +29,10 @@ func atoi(s string) int {
 // TODO sort out 'log' vs 'fmt' for output
 
 func main() {
-	// dingding()
-	// icedLemonTea()
-	// portugueseTart()
-	// sinoCentre()
-	// tungChung()
-	mongKok()
+	interfaces()
+	types()
+	types2()
+	xml()
+	typeSwitches()
+	structs()
 }

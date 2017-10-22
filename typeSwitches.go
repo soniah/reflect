@@ -2,14 +2,8 @@ package main
 
 import "fmt"
 
-/* Nothing new or interesting here, just like Tung Chung railway station.
-   - https://tour.golang.org/methods/16
-   - https://golang.org/doc/effective_go.html#type_switch
-*/
-
-// The Marriott Hotel - several months trapped on Prison Island.  Airport
-// barbed wire on 3 sides and building sites on the 4th, the sea so close yet
-// so far.
+// Prison Island Airport Hotel - barbed wire on 3 sides and building sites on
+// the 4th, sea so close yet so far.
 func prisonIsland(t interface{}) {
 	switch t := t.(type) {
 	case bool:
@@ -25,7 +19,13 @@ func prisonIsland(t interface{}) {
 	}
 }
 
-func tungChung() {
+/*
+Nothing new or interesting here - Tung Chung railway station.
+- https://tour.golang.org/methods/16
+- https://golang.org/doc/effective_go.html#type_switch
+*/
+
+func typeSwitches() {
 	fmt.Printf("\n%s\n\n", "-- tungChung() -- type switches --")
 	fmt.Println("Note that t returns the concrete value of `t interface{}`")
 	fmt.Println()
