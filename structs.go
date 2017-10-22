@@ -17,6 +17,7 @@ type guitaristT struct {
 	American bool     // example of missing tag
 	Rating   float32  `required=true`
 	Styles   []string `required=true,minsize=1`
+	Cities   map[string]int
 }
 
 // Mong Kok, Prince Edward, Sham Shui Po, Cheung Sha Wan.
@@ -26,6 +27,8 @@ func structs() {
 	// example parameters taken out of an environment variable
 
 	jimiEnvvar := "surname=Hendrix|year=1942|american=true|rating=9.99|styles=blues|styles=rock|styles=psychedelic"
+	jimiEnvvar += "|cities=New York^17|cities=Los Angeles^14|cities=London^11|cities=Bay Area^9"
+
 	jimiStruct := fillStruct(jimiEnvvar)
 	fmt.Printf("\n%# v", pretty.Formatter(jimiStruct))
 
@@ -34,7 +37,8 @@ func structs() {
 func fillStruct(allParameters string) guitaristT {
 
 	result := guitaristT{}
-	result.Styles = make([]string, 10)
+	result.Styles = make([]string, 0) // other values will put empty elements at start
+	result.Cities = make(map[string]int)
 
 	// If we want to modify x by reflection, we must give the reflection library
 	// a pointer to the value we want to modify. Think of passing x to a
@@ -74,42 +78,54 @@ func fillStruct(allParameters string) guitaristT {
 		if len(kv) != 2 {
 			log.Fatalln("malformed parameter", parameter)
 		}
-		key := strings.Title(kv[0])
+		keyAsString := strings.Title(kv[0])
 		valueAsString := kv[1]
-		field := v.FieldByName(key)
+		fieldAsValue := v.FieldByName(keyAsString)
 
-		switch field.Kind() {
+		switch fieldAsValue.Kind() {
 
 		case reflect.String:
-			fmt.Println("key:", key, "is String, has value:", valueAsString)
-			field.SetString(valueAsString)
+			fmt.Println("keyAsString:", keyAsString, "is String, has value:", valueAsString)
+			fieldAsValue.SetString(valueAsString)
 
 		case reflect.Int64:
-			fmt.Println("key:", key, "is Int64, has value:", valueAsString)
+			fmt.Println("keyAsString:", keyAsString, "is Int64, has value:", valueAsString)
 			i, err := strconv.ParseInt(valueAsString, 10, 64)
 			catch(err)
-			field.SetInt(i)
+			fieldAsValue.SetInt(i)
 
 		case reflect.Bool:
-			fmt.Println("key:", key, "is Bool, has value:", valueAsString)
+			fmt.Println("keyAsString:", keyAsString, "is Bool, has value:", valueAsString)
 			b, err := strconv.ParseBool(valueAsString)
 			catch(err)
-			field.SetBool(b)
+			fieldAsValue.SetBool(b)
 
 		case reflect.Float32:
-			fmt.Println("key:", key, "is Float32, has value:", valueAsString)
+			fmt.Println("keyAsString:", keyAsString, "is Float32, has value:", valueAsString)
 			f, err := strconv.ParseFloat(valueAsString, 32)
 			catch(err)
-			field.SetFloat(f)
+			fieldAsValue.SetFloat(f)
 
 		case reflect.Slice:
-			fmt.Println("key:", key, "is Slice, has value:", valueAsString)
+			fmt.Println("keyAsString:", keyAsString, "is Slice, has value:", valueAsString)
 			valueAsValue := reflect.ValueOf(valueAsString)
-			// field = reflect.Append(field, valueAsValue) // FAILS
-			field.Set(reflect.Append(field, valueAsValue))
+			fieldAsValue.Set(reflect.Append(fieldAsValue, valueAsValue))
+
+		case reflect.Map:
+			fmt.Println("keyAsString", keyAsString, "is Map, has value:", valueAsString)
+			mapKV := strings.Split(valueAsString, "^")
+			if len(mapKV) != 2 {
+				log.Fatalln("malformed map key/value:", mapKV)
+			}
+			mapK := mapKV[0]
+			mapV := mapKV[1]
+			thisMap := fieldAsValue.Interface().(map[string]int)
+			thisMap[mapK] = atoi(mapV)
+			thisMapAsValue := reflect.ValueOf(thisMap)
+			fieldAsValue.Set(thisMapAsValue)
 
 		default:
-			fmt.Println("XXX: key:", key, "is", field.Kind(), "has value:", valueAsString)
+			fmt.Println("XXX: keyAsString:", keyAsString, "is", fieldAsValue.Kind(), "has value:", valueAsString)
 		}
 		fmt.Println()
 	}
